@@ -95,3 +95,5 @@ typings/
 
 # End of https://www.gitignore.io/api/node,angular
 game-concepts/\.idea/
+
+game-concepts/dist/
