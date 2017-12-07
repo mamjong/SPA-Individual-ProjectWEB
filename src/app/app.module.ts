@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { ConceptComponent } from './concept/concept.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { ConceptItemComponent } from './concept/concept-item/concept-item.component';
+import {ConceptService} from "./concept/concept.service";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import { ConceptItemComponent } from './concept/concept-item/concept-item.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [ConceptService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

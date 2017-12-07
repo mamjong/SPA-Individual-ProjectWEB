@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+  outline: 1px solid #000000;
+  outline-offset: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+

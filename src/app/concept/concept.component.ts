@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Concept} from "./concept.model";
 import {User} from "../shared/user.model";
+import {Subscription} from "rxjs/Subscription";
+import {ConceptService} from "./concept.service";
 
 @Component({
   selector: 'app-concept',
@@ -9,17 +11,16 @@ import {User} from "../shared/user.model";
 })
 export class ConceptComponent implements OnInit {
   concepts: Concept[];
-  testConcept: Concept;
-  testUser: User;
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private conceptService: ConceptService) { }
 
   ngOnInit() {
-    this.testUser = new User('Maanmidejo', 'Mark de Jong', '1999-06-29', 'Hi there!');
-    this.testConcept = new Concept('TestConcept', 'MMORPG', 'Just a great MMORPG', 24,
-      [{path: 'https://eu.battle.net/forums/static/images/game-logos/game-logo-wow.png'}], this.testUser);
-    this.concepts = [];
-    this.concepts.push(this.testConcept);
+    this.subscription = this.conceptService.conceptsChanged
+      .subscribe((concepts) => {
+        this.concepts = concepts;
+      });
+    this.conceptService.getConcepts();
   }
 
 }

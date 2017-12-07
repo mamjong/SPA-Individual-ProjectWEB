@@ -1,6 +1,8 @@
 <div class="row">
-  <app-concept-item
-    *ngFor="let concept of concepts; let i = index"
-    [concept]="concept"
-    [index]="i"></app-concept-item>
+  <div class="col-xs-12">
+    <app-concept-item
+      *ngFor="let concept of concepts; let i = index"
+      [concept]="concept"
+      [index]="i"></app-concept-item>
+  </div>
 </div>
