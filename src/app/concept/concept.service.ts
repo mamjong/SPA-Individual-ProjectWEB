@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 import {Concept} from "./concept.model";
 import {Http, Headers} from "@angular/http";
 import {Subject} from "rxjs/Subject";
@@ -29,6 +29,10 @@ export class ConceptService {
   populateConcepts(concepts: Concept[]) {
     this.concepts = concepts;
     this.conceptsChanged.next(this.concepts.slice());
+  }
+
+  getConcept(index: number) {
+    return this.concepts[index];
   }
 
 }

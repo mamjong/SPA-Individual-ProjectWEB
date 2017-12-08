@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Concept} from "./concept.model";
-import {User} from "../shared/user.model";
 import {Subscription} from "rxjs/Subscription";
 import {ConceptService} from "./concept.service";
 
