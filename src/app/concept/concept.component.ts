@@ -9,8 +9,8 @@ import {ConceptService} from "./concept.service";
   styleUrls: ['./concept.component.css']
 })
 export class ConceptComponent implements OnInit {
-  concepts: Concept[];
-  subscription: Subscription;
+  private concepts: Concept[];
+  private subscription: Subscription;
 
   constructor(private conceptService: ConceptService) { }
 

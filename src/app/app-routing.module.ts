@@ -4,13 +4,15 @@ import {NgModule} from "@angular/core";
 import {ConceptDetailComponent} from "./concept/concept-detail/concept-detail.component";
 import {UserComponent} from "./user/user.component";
 import {LoginComponent} from "./login/login.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/concepts', pathMatch: 'full'},
   { path: 'concepts', component: ConceptComponent },
   { path: 'concepts/:index', component: ConceptDetailComponent },
   { path: 'user/:username', component: UserComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

@@ -10,9 +10,9 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  user: User;
-  subscription: Subscription;
-  username: string;
+  private user: User;
+  private subscription: Subscription;
+  private username: string;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,

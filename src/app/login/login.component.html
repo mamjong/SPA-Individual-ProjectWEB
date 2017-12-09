@@ -3,7 +3,7 @@
     <form (ngSubmit)="onLogin(f)" #f="ngForm">
       <div class="row">
         <div class="col-xs-12 form-group">
-          <label for="username"></label>
+          <label for="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -15,16 +15,16 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
+          <p class="text-danger" *ngIf="loginFailed">Login failed...</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
           <button
             class="btn btn-success"
             type="submit"
             [disabled]="!f.valid">Login
           </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <p *ngIf="loginFailed">Login failed...</p>
         </div>
       </div>
     </form>

@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {User} from "../shared/user.model";
-import {LoginService} from "./login.service";
-import {Subscription} from "rxjs/Subscription";
+import {LoginService} from "../shared/login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,18 +12,14 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') private form: NgForm;
   private formValue;
   private username: string;
-  private user: User;
-  private subscription: Subscription;
+  private user;
   private loginFailed: boolean;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private router: Router) {
+  }
 
   ngOnInit() {
-    this.subscription = this.loginService.itemChanged
-      .subscribe((user) => {
-        this.user = user;
-      });
-
     this.loginFailed = false;
   }
 
@@ -32,14 +27,15 @@ export class LoginComponent implements OnInit {
     this.formValue = form.value;
     this.username = this.formValue.username;
 
-    this.loginService.getItem(this.username);
-
-    console.log(this.user);
-
-    if (this.user === undefined) {
-      this.loginFailed = true;
-    } else {
-
-    }
+    this.loginService.login(this.username)
+      .then((user) => {
+        this.loginService.setLoggedIn(true);
+        this.loginService.setUser(user.json());
+        this.router.navigateByUrl('/concepts');
+      })
+      .catch((error) => {
+        console.log(error);
+        this.loginFailed = true;
+      })
   }
 }

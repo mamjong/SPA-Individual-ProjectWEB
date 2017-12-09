@@ -13,7 +13,8 @@ import { UserComponent } from './user/user.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
-import {LoginService} from "./login/login.service";
+import {LoginService} from "./shared/login.service";
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {LoginService} from "./login/login.service";
     ConceptDetailComponent,
     UserComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
