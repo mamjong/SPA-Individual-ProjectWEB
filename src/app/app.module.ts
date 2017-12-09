@@ -10,6 +10,10 @@ import {UserService} from "./user/user.service";
 import {HttpModule} from "@angular/http";
 import { ConceptDetailComponent } from './concept/concept-detail/concept-detail.component';
 import { UserComponent } from './user/user.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from "@angular/forms";
+import {LoginService} from "./login/login.service";
 
 @NgModule({
   declarations: [
@@ -17,14 +21,17 @@ import { UserComponent } from './user/user.component';
     ConceptComponent,
     ConceptItemComponent,
     ConceptDetailComponent,
-    UserComponent
+    UserComponent,
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpModule
   ],
-  providers: [ConceptService, UserService],
+  providers: [ConceptService, UserService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

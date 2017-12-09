@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../shared/user.model";
 import {UserService} from "./user.service";
 import {Subscription} from "rxjs/Subscription";
@@ -16,7 +16,8 @@ export class UserComponent implements OnInit {
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
 
@@ -24,15 +25,14 @@ export class UserComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.username = params['username'];
-          this.userService.getUser(this.username);
-          this.user = this.userService.returnUser();
         }
       );
 
-    this.subscription = this.userService.userChanged
+    this.subscription = this.userService.itemChanged
       .subscribe((user) => {
         this.user = user;
       });
+    this.userService.getItem(this.username);
   }
 
 }

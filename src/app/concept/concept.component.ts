@@ -15,11 +15,11 @@ export class ConceptComponent implements OnInit {
   constructor(private conceptService: ConceptService) { }
 
   ngOnInit() {
-    this.subscription = this.conceptService.conceptsChanged
+    this.subscription = this.conceptService.itemsChanged
       .subscribe((concepts) => {
         this.concepts = concepts;
       });
-    this.conceptService.getConcepts();
+    this.conceptService.getItems();
   }
 
 }

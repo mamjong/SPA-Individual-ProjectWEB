@@ -21,7 +21,7 @@ export class ConceptDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = +params['index'];
-          this.concept = this.conceptService.getConcept(this.id);
+          this.concept = this.conceptService.getItem(this.id);
         }
       )
   }

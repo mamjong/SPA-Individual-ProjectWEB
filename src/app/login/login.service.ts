@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment.prod";
-import {User} from "../shared/user.model";
 import {Http, Headers} from "@angular/http";
 import {Subject} from "rxjs/Subject";
+import {User} from "../shared/user.model";
 import {IObjectService} from "../shared/IObjectService";
 
 @Injectable()
-export class UserService implements IObjectService {
+export class LoginService implements IObjectService{
   apiUrl = environment.serverUrl + '/user/';
   item: User;
 
@@ -26,8 +26,8 @@ export class UserService implements IObjectService {
       });
   }
 
-  populateItem(item: User) {
-    this.item = item;
+  populateItem(user: User) {
+    this.item = user;
     this.itemChanged.next(this.item);
   }
 }
