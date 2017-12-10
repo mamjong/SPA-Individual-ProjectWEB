@@ -12,9 +12,12 @@ import { ConceptDetailComponent } from './concept/concept-detail/concept-detail.
 import { UserComponent } from './user/user.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginService} from "./shared/login.service";
 import { ProfileComponent } from './profile/profile.component';
+import {DropdownDirective} from "./shared/dropdown.directive";
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import {DateValueAccessorModule} from "angular-date-value-accessor";
 
 @NgModule({
   declarations: [
@@ -25,12 +28,16 @@ import { ProfileComponent } from './profile/profile.component';
     UserComponent,
     HeaderComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    DropdownDirective,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    DateValueAccessorModule,
     HttpModule
   ],
   providers: [ConceptService, UserService, LoginService],

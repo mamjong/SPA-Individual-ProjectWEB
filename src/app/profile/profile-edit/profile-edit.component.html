@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name: </label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="DoB">Date of Birth: </label>
+            <input
+              type="date"
+              id="DoB"
+              formControlName="DoB"
+              class="form-control"
+              useValueAsDate="DoB">
+            <div class="alert alert-danger" *ngIf="profileForm.get('DoB').invalid">Please enter a valid date of birth.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="bio">Bio: </label>
+            <textarea
+              type="text"
+              id="bio"
+              formControlName="bio"
+              class="form-control"
+              rows="6"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!profileForm.valid">Save</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import {ConceptDetailComponent} from "./concept/concept-detail/concept-detail.co
 import {UserComponent} from "./user/user.component";
 import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {ProfileEditComponent} from "./profile/profile-edit/profile-edit.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/concepts', pathMatch: 'full'},
@@ -12,7 +13,9 @@ const appRoutes: Routes = [
   { path: 'concepts/:index', component: ConceptDetailComponent },
   { path: 'user/:username', component: UserComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent, children: [
+    { path: 'edit', component: ProfileEditComponent }
+  ] }
 ];
 
 @NgModule({
