@@ -74,6 +74,10 @@ export class ConceptEditComponent implements OnInit {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
+  get formData() {
+    return this.conceptForm.get('art');
+  }
+
   private initForm() {
     let conceptTitle = '';
     let conceptGenre = '';
