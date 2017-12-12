@@ -7,11 +7,12 @@ export class Concept {
   public description: string;
   public likes: number;
   public art: [{
+    _id: string,
     path: string;
   }];
-  public user: User;
+  public user: string;
 
-  constructor(id: string, title: string, genre: string, description: string, likes: number, art: [{path: string;}], user: User) {
+  constructor(id: string, title: string, genre: string, description: string, likes: number, art: [{_id: string, path: string;}], user: string) {
     this.id = id;
     this.title = title;
     this.genre = genre;

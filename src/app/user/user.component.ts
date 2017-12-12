@@ -5,6 +5,7 @@ import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Observer} from "rxjs/Observer";
 import {Subscriber} from "rxjs/Subscriber";
+import {ConceptsState} from "../shared/concepts.state";
 
 @Component({
   selector: 'app-user',

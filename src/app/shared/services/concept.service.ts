@@ -3,12 +3,12 @@ import {Http} from "@angular/http";
 import {IService} from "../IService";
 import {Observable} from "rxjs/Observable";
 import {environment} from "../../../environments/environment.prod";
+import {Concept} from "../models/concept.model";
 
 @Injectable()
-export class ConceptService implements IService{
+export class ConceptService implements IService {
   apiCollectionUrl = environment.serverUrl + '/concepts';
   apiEntityUrl = environment.serverUrl + '/concept/';
-  concepts = [];
 
   constructor(private http: Http) {
   }
@@ -17,15 +17,15 @@ export class ConceptService implements IService{
     return this.http.get(this.apiCollectionUrl);
   }
 
-  postRequest(): Observable<any> {
-    return
+  postRequest(object: Concept): Observable<any> {
+    return this.http.post(this.apiCollectionUrl, object);
   }
 
-  putRequest(): Observable<any> {
-    return
+  putRequest(routeParams: string, object: Concept): Observable<any> {
+    return this.http.put(this.apiEntityUrl + routeParams, object);
   }
 
-  deleteRequest(): Observable<any> {
-    return
+  deleteRequest(routeParams: string): Observable<any> {
+    return this.http.delete(this.apiEntityUrl + routeParams);
   }
 }

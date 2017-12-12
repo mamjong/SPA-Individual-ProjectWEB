@@ -7,11 +7,14 @@ import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {ProfileEditComponent} from "./profile/profile-edit/profile-edit.component";
 import {SignupComponent} from "./signup/signup.component";
+import {ConceptEditComponent} from "./concept/concept-edit/concept-edit.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/concepts', pathMatch: 'full'},
   { path: 'concepts', component: ConceptComponent, children: [
-    { path: ':index', component: ConceptDetailComponent }
+    { path: 'new', component: ConceptEditComponent },
+    { path: ':index', component: ConceptDetailComponent },
+    { path: ':index/edit', component: ConceptEditComponent}
   ] },
   { path: 'user/:username', component: UserComponent },
   { path: 'login', component: LoginComponent },

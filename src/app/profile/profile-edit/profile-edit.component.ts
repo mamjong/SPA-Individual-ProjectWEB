@@ -39,7 +39,6 @@ export class ProfileEditComponent implements OnInit {
         .subscribe(
           (response) => {
             if (response.json()._id) {
-              console.log('yaboi: ' + response);
               this.user.name = response.json().name;
               this.user.DoB = response.json().DoB;
               this.user.bio = response.json().bio;

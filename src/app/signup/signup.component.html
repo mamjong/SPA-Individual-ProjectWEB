@@ -12,7 +12,7 @@
               class="form-control"
               [(ngModel)]="username"
               (click)="onUsernameChange()">
-            <div class="alert alert-danger" *ngIf="signupForm.get('username').invalid">Username is required</div>
+            <div class="alert alert-danger" *ngIf="signupForm.get('username').invalid && signupForm.touched">Username is required</div>
             <div class="alert alert-danger" *ngIf="usernameTaken">This username is unavailable</div>
           </div>
         </div>

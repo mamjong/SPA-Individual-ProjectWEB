@@ -1,9 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
 .list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+  outline: 1px solid #3f3f3f;
+  outline-offset: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 0;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+  z-index: 2;
+  color: white;
+  background-color: #3f3f3f;
+  border-color: #3f3f3f;
+}
+
+.list-group-item.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text, .list-group-item.active:hover .list-group-item-text {
+  color: white;
+}
+
+.listItem {
   outline: 1px solid #000000;
   outline-offset: 0;
   margin-top: 5px;
   margin-bottom: 5px;
+  border-radius: 0;
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 0;
+}
+
+.navbar-inverse {
+  background-color: #3f3f3f;
+  border-color: #3f3f3f;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  color: black;
+  background-color: #fff;
+  outline: 0;
 }
 
 

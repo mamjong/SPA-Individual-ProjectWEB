@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">Gacon</a>
@@ -7,9 +7,9 @@
         <li routerLinkActive="active"><a routerLink="/concepts">Concepts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/profile">My Profile</a></li>
-        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/login">Login</a></li>
-        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/signup">Sign up</a></li>
+        <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/profile"><span class="glyphicon glyphicon-user"></span>      My Profile</a></li>
+        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>      Login</a></li>
+        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/signup"><span class="glyphicon glyphicon-user"></span>      Sign up</a></li>
       </ul>
   </div>
 </nav>

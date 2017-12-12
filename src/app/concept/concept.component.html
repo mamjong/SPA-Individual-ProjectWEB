@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-md-4">
     <app-concept-item
       *ngFor="let concept of concepts; let i = index"
       [concept]="concept"
       [index]="i"></app-concept-item>
   </div>
-  <div class="col-xs-8">
+  <div class="col-md-8">
     <router-outlet></router-outlet>
   </div>
 </div>

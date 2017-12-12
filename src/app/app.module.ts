@@ -19,6 +19,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import {DateValueAccessorModule} from "angular-date-value-accessor";
 import {BtnAvailableDirective} from './shared/directives/btn-available.directive';
 import { SignupComponent } from './signup/signup.component';
+import { ConceptEditComponent } from './concept/concept-edit/concept-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SignupComponent } from './signup/signup.component';
     DropdownDirective,
     ProfileEditComponent,
     BtnAvailableDirective,
-    SignupComponent
+    SignupComponent,
+    ConceptEditComponent
   ],
   imports: [
     BrowserModule,
