@@ -12,7 +12,7 @@
                   id="title"
                   formControlName="title"
                   class="form-control">
-                <div class="alert alert-danger" *ngIf="conceptForm.get('title').invalid && touched">A Title is required.
+                <div class="alert alert-danger" *ngIf="conceptForm.get('title').invalid && conceptForm.touched">A Title is required.
                 </div>
               </div>
             </div>
@@ -27,7 +27,7 @@
                   id="genre"
                   formControlName="genre"
                   class="form-control">
-                <div class="alert alert-danger" *ngIf="conceptForm.get('genre').invalid && touched">A Genre is required.
+                <div class="alert alert-danger" *ngIf="conceptForm.get('genre').invalid && conceptForm.touched">A Genre is required.
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@
                   formControlName="description"
                   class="form-control"
                   rows="10"></textarea>
-                <div class="alert alert-danger" *ngIf="conceptForm.get('description').invalid && touched">A Genre is
+                <div class="alert alert-danger" *ngIf="conceptForm.get('description').invalid && conceptForm.touched">A Genre is
                   required.
                 </div>
               </div>
