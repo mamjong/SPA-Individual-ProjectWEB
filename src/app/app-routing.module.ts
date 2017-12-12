@@ -6,13 +6,16 @@ import {UserComponent} from "./user/user.component";
 import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {ProfileEditComponent} from "./profile/profile-edit/profile-edit.component";
+import {SignupComponent} from "./signup/signup.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/concepts', pathMatch: 'full'},
-  { path: 'concepts', component: ConceptComponent },
-  { path: 'concepts/:index', component: ConceptDetailComponent },
+  { path: 'concepts', component: ConceptComponent, children: [
+    { path: ':index', component: ConceptDetailComponent }
+  ] },
   { path: 'user/:username', component: UserComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, children: [
     { path: 'edit', component: ProfileEditComponent }
   ] }

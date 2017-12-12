@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Concept} from "../concept.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {Concept} from "../../shared/models/concept.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {ConceptService} from "../concept.service";
+import {ConceptService} from "../../shared/services/concept.service";
 
 @Component({
   selector: 'app-concept-detail',
@@ -9,19 +9,19 @@ import {ConceptService} from "../concept.service";
   styleUrls: ['./concept-detail.component.css']
 })
 export class ConceptDetailComponent implements OnInit {
+  private index: number;
   private concept: Concept;
-  private id: number;
 
-  constructor(private conceptService: ConceptService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private conceptService: ConceptService) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = +params['index'];
-          this.concept = this.conceptService.getItem(this.id);
+          this.index = +params['index'];
+          this.concept = this.conceptService.concepts[this.index];
         }
       )
   }

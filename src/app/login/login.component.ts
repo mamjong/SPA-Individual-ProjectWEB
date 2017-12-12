@@ -1,8 +1,10 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {LoginService} from "../shared/login.service";
+import {UserService} from "../shared/services/user.service";
 import {Router} from "@angular/router";
-import {User} from "../shared/user.model";
+import {User} from "../shared/models/user.model";
+import {UserState} from "../shared/user.state";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,10 @@ export class LoginComponent implements OnInit {
   private user: User;
   private username: string;
   private loginFailed: boolean;
+  private subscription: Subscription;
 
-  constructor(private loginService: LoginService,
+  constructor(private userService: UserService,
+              private userState: UserState,
               private router: Router) {
   }
 
@@ -28,17 +32,23 @@ export class LoginComponent implements OnInit {
     this.formValue = form.value;
     this.username = this.formValue.username;
 
-    this.loginService.login(this.username)
-      .then((user) => {
-        this.user = new User(user.json()._id, user.json().name, user.json().DoB, user.json().bio);
-        this.user.setDoBString();
-        this.loginService.setUser(this.user);
-        this.loginService.setLoggedIn(true);
-        this.router.navigateByUrl('/concepts');
-      })
-      .catch((error) => {
-        console.log(error);
-        this.loginFailed = true;
-      })
+    this.subscription = this.userService.getRequest(this.username)
+      .subscribe(
+        (response) => {
+          this.user = new User(response.json()._id, response.json().name, response.json().DoB, response.json().bio);
+          this.user.setDoBString();
+          this.userState.setUser(this.user);
+          this.userState.setLoggedIn(true);
+          this.router.navigateByUrl('/concepts');
+        },
+        (error) => {
+          console.log(error);
+          this.loginFailed = true;
+          this.subscription.unsubscribe();
+        },
+        () => {
+          this.subscription.unsubscribe();
+        }
+      )
   }
 }

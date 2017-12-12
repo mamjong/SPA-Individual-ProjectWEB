@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../shared/user.model";
-import {UserService} from "./user.service";
+import {User} from "../shared/models/user.model";
+import {UserService} from "../shared/services/user.service";
 import {Subscription} from "rxjs/Subscription";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Observer} from "rxjs/Observer";
+import {Subscriber} from "rxjs/Subscriber";
 
 @Component({
   selector: 'app-user',
@@ -15,8 +17,7 @@ export class UserComponent implements OnInit {
   private username: string;
 
   constructor(private userService: UserService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -28,11 +29,17 @@ export class UserComponent implements OnInit {
         }
       );
 
-    this.subscription = this.userService.itemChanged
+    this.subscription = this.userService.getRequest(this.username)
       .subscribe((user) => {
-        this.user = user;
-      });
-    this.userService.getItem(this.username);
+          this.user = new User(user.json()._id, user.json().name, user.json().DoB, user.json().bio);
+          this.user.setDoBString();
+        },
+        (error) => {
+          this.subscription.unsubscribe();
+          console.log(error);
+        },
+        () => {
+          this.subscription.unsubscribe();
+        });
   }
-
 }

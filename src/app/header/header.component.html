@@ -8,7 +8,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/profile">My Profile</a></li>
-        <li *ngIf="!loggedIn" routerLinkActive="active"><a routerLink="/login">Login</a></li>
+        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/login">Login</a></li>
+        <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/signup">Sign up</a></li>
       </ul>
   </div>
 </nav>

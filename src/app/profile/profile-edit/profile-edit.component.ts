@@ -1,9 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LoginService} from "../../shared/login.service";
-import {User} from "../../shared/user.model";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
+import {UserService} from "../../shared/services/user.service";
+import {User} from "../../shared/models/user.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {dateLimitValidator} from "../../shared/datelimit.directive";
+import {dateLimitValidator} from "../../shared/validators/date-limit.validator";
+import {UserState} from "../../shared/user.state";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-profile-edit',
@@ -15,13 +17,15 @@ export class ProfileEditComponent implements OnInit {
   private user: User;
   private minDate: Date;
   private minDateYear: number;
+  private subscription: Subscription;
 
-  constructor(private loginService: LoginService,
+  constructor(private userService: UserService,
+              private userState: UserState,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    this.user = this.loginService.getUser();
+    this.user = this.userState.getUser();
     this.minDate = new Date();
     this.minDateYear = this.minDate.getFullYear() - 100;
     this.minDate.setFullYear(this.minDateYear, 1, 1);
@@ -29,22 +33,30 @@ export class ProfileEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loginService.updateUser(this.user.username, this.profileForm.value)
-      .then((response) => {
+    if (this.profileForm.valid) {
 
-        let jsonResponse = response.json();
+      this.subscription = this.userService.putRequest(this.user.username, this.profileForm.value)
+        .subscribe(
+          (response) => {
+            if (response.json()._id) {
+              console.log('yaboi: ' + response);
+              this.user.name = response.json().name;
+              this.user.DoB = response.json().DoB;
+              this.user.bio = response.json().bio;
 
-        this.user.name = jsonResponse.name;
-        this.user.DoB = jsonResponse.DoB;
-        this.user.bio = jsonResponse.bio;
-
-        this.loginService.setUser(this.user);
-
-        this.onCancel();
-      })
-      .catch((error) => {
-        console.log('failed with error: ' + error);
-      })
+              this.userState.setUser(this.user);
+            }
+          },
+          (error) => {
+            console.log(error);
+            this.subscription.unsubscribe();
+          },
+          () => {
+            this.subscription.unsubscribe();
+            this.onCancel();
+          }
+        )
+    }
   }
 
   onCancel() {
@@ -56,7 +68,7 @@ export class ProfileEditComponent implements OnInit {
     let profileDoB;
     let profileBio;
 
-    const user = this.loginService.getUser();
+    const user = this.userState.getUser();
 
     profileName = user.name;
     profileDoB = user.DoB;
@@ -68,5 +80,4 @@ export class ProfileEditComponent implements OnInit {
       'bio': new FormControl(profileBio)
     });
   }
-
 }

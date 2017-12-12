@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Concept} from "../concept.model";
+import {Concept} from "../../shared/models/concept.model";
 
 @Component({
   selector: 'app-concept-item',
@@ -13,6 +13,9 @@ export class ConceptItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (this.concept.likes === undefined) {
+      this.concept.likes = 0;
+    }
   }
 
 }

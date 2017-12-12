@@ -1,5 +1,5 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
-import {LoginService} from "../shared/login.service";
+import {UserState} from "../shared/user.state";
 
 @Component({
   selector: 'app-header',
@@ -9,14 +9,14 @@ import {LoginService} from "../shared/login.service";
 export class HeaderComponent implements OnInit, DoCheck {
   private loggedIn: boolean;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private userState: UserState) { }
 
   ngOnInit() {
-    this.loggedIn = this.loginService.getLoggedIn();
+    this.userState.setLoggedIn(false);
   }
 
   ngDoCheck() {
-    this.loggedIn = this.loginService.getLoggedIn();
+    this.loggedIn = this.userState.getLoggedIn();
   }
 
 }

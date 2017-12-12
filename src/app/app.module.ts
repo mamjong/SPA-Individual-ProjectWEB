@@ -5,19 +5,20 @@ import { AppComponent } from './app.component';
 import { ConceptComponent } from './concept/concept.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { ConceptItemComponent } from './concept/concept-item/concept-item.component';
-import {ConceptService} from "./concept/concept.service";
-import {UserService} from "./user/user.service";
+import {ConceptService} from "./shared/services/concept.service";
+import {UserService} from "./shared/services/user.service";
 import {HttpModule} from "@angular/http";
 import { ConceptDetailComponent } from './concept/concept-detail/concept-detail.component';
 import { UserComponent } from './user/user.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {LoginService} from "./shared/login.service";
 import { ProfileComponent } from './profile/profile.component';
-import {DropdownDirective} from "./shared/dropdown.directive";
+import {DropdownDirective} from "./shared/directives/dropdown.directive";
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import {DateValueAccessorModule} from "angular-date-value-accessor";
+import {BtnAvailableDirective} from './shared/directives/btn-available.directive';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import {DateValueAccessorModule} from "angular-date-value-accessor";
     LoginComponent,
     ProfileComponent,
     DropdownDirective,
-    ProfileEditComponent
+    ProfileEditComponent,
+    BtnAvailableDirective,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import {DateValueAccessorModule} from "angular-date-value-accessor";
     DateValueAccessorModule,
     HttpModule
   ],
-  providers: [ConceptService, UserService, LoginService],
+  providers: [ConceptService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
