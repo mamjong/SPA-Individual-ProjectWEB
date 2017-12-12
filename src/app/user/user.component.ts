@@ -12,7 +12,7 @@ import {Subscriber} from "rxjs/Subscriber";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  private user: User;
+  user: User;
   private subscription: Subscription;
   private username: string;
 

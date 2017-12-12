@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   private formValue;
   private user: User;
   private username: string;
-  private loginFailed: boolean;
+  loginFailed: boolean;
   private subscription: Subscription;
 
   constructor(private userService: UserService,

@@ -13,9 +13,9 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  private signupForm: FormGroup;
-  private username: string;
-  private usernameTaken: boolean;
+  signupForm: FormGroup;
+  username: string;
+  usernameTaken: boolean;
   private minDate: Date;
   private minDateYear: number;
   private subscription: Subscription;
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
     this.initForm();
   }
 
-  private onSubmit() {
+  onSubmit() {
     if (this.signupForm.valid) {
       this.subscription = this.userService.postRequest(this.signupForm.value)
         .subscribe(
@@ -64,11 +64,11 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  private onCancel() {
+  onCancel() {
     this.router.navigate(['/concepts']);
   }
 
-  private onUsernameChange() {
+  onUsernameChange() {
     this.usernameTaken = false;
   }
 

@@ -7,8 +7,8 @@ import {Concept} from "../../shared/models/concept.model";
   styleUrls: ['./concept-item.component.css']
 })
 export class ConceptItemComponent implements OnInit {
-  @Input() private concept: Concept;
-  @Input() private index: number;
+  @Input() concept: Concept;
+  @Input() index: number;
 
   constructor() { }
 

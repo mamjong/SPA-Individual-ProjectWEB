@@ -11,7 +11,7 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private user: User;
+  user: User;
   private subscription: Subscription;
 
   constructor(private userState: UserState,

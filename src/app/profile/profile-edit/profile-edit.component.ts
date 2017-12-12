@@ -13,7 +13,7 @@ import {Subscription} from "rxjs/Subscription";
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent implements OnInit {
-  private profileForm: FormGroup;
+  profileForm: FormGroup;
   private user: User;
   private minDate: Date;
   private minDateYear: number;

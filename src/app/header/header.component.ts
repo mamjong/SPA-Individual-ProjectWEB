@@ -7,7 +7,7 @@ import {UserState} from "../shared/user.state";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, DoCheck {
-  private loggedIn: boolean;
+  loggedIn: boolean;
 
   constructor(private userState: UserState) { }
 

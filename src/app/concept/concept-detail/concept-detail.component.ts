@@ -10,7 +10,7 @@ import {ConceptService} from "../../shared/services/concept.service";
 })
 export class ConceptDetailComponent implements OnInit {
   private index: number;
-  private concept: Concept;
+  concept: Concept;
 
   constructor(private route: ActivatedRoute,
               private router: Router,

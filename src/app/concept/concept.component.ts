@@ -10,7 +10,7 @@ import {ConceptService} from "../shared/services/concept.service";
 
 })
 export class ConceptComponent implements OnInit {
-  private concepts: Concept[];
+  concepts: Concept[];
   private subscription: Subscription;
 
   constructor(private conceptService: ConceptService) {
