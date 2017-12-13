@@ -1,59 +1,43 @@
 <div class="row">
-  <div class="col-xs-8">
+  <div *ngIf="state === 'loading'" class="col-xs-12">
     <div class="row">
-      <div class="col-xs-12">
-        <h1>{{ user.name }}</h1>
-        <!--<a-->
-          <!--style="cursor: pointer;"-->
-          <!--(click)="onUserClick()"><h5>by {{ concept.user }}</h5></a>-->
-      </div>
+      <div class="loader center-block"></div>
+      <h3 class="text-center">Loading</h3>
     </div>
-    <hr>
-    <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-    <!--<div-->
-    <!--class="btn-group"-->
-    <!--appDropdown>-->
-    <!--<button-->
-    <!--type="button"-->
-    <!--class="btn btn-primary dropdown-toggle">-->
-    <!--Manage Recipe <span class="caret"></span>-->
-    <!--</button>-->
-    <!--<ul class="dropdown-menu">-->
-    <!--<li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>-->
-    <!--<li><a style="cursor: pointer;" (click)="onEditRecipe()">Edit Recipe</a></li>-->
-    <!--<li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete Recipe</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <div class="row">
-      <div class="col-xs-12">
-        {{ user.DoBString }}
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-xs-12">
-        {{ user.bio }}
-      </div>
-    </div>
-    <hr>
-    <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-    <!--<ul class="list-group">-->
-    <!--<li-->
-    <!--class="list-group-item"-->
-    <!--*ngFor="let ingredient of recipe.ingredients">-->
-    <!--{{ ingredient.name }} - {{ ingredient.amount }}-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
   </div>
-  <div class="col-xs-4">
+  <div *ngIf="state === 'notFound'" class="col-xs-8">
     <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-danger">User with given username doesn't exist!</h4>
+      </div>
     </div>
+  </div>
+  <div *ngIf="state === 'failure'" class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-danger">Our </h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="state === 'success'" class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ user.name || user.username }}</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.DoBString || 'User hasn\'t submitted his DoB' }}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.bio || 'User has no bio' }}
+      </div>
+    </div>
+    <hr>
   </div>
 </div>
 

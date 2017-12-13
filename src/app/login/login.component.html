@@ -10,12 +10,29 @@
             class="form-control"
             name="username"
             ngModel
-            required>
+            required
+            (focus)="usernameTaken = false">
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <p class="text-danger" *ngIf="loginFailed">Login failed...</p>
+          <p class="text-danger" *ngIf="usernameTaken">Username unavailable...</p>
+        </div>
+      </div>
+      <div *ngIf="state === 'loading'">
+        <div class="row">
+          <div style="margin-bottom: 15px;" class="col-xs-12">
+            <div style="margin-right: 10px;" class="pull-left loader-small"></div>
+            <h6 class="pull-left"> Signing in...</h6>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="state === 'failure'">
+        <div class="row">
+          <div style="margin-bottom: 15px" class="col-xs-12">
+            <h5 class="text-danger">Signing in failed...</h5>
+            <h6>Please try again later.</h6>
+          </div>
         </div>
       </div>
       <div class="row">

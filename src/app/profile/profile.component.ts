@@ -13,6 +13,7 @@ import {Subscription} from "rxjs/Subscription";
 export class ProfileComponent implements OnInit {
   user: User;
   private subscription: Subscription;
+  private state;
 
   constructor(private userState: UserState,
               private userService: UserService,
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.state = 'stateless';
     this.userState.userChanged
       .subscribe((user) => {
         console.log('userChanged next was called!');
@@ -34,6 +36,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onDeleteProfile() {
+    this.state = 'loading';
 
     this.subscription = this.userService.deleteRequest(this.user.username)
       .subscribe(
@@ -43,6 +46,12 @@ export class ProfileComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.state = 'failure';
+
+          setTimeout(() => {
+            this.state = 'stateless'
+          }, 3000);
+
           this.subscription.unsubscribe();
         },
         () => {

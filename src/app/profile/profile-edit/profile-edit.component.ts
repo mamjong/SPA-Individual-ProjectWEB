@@ -18,6 +18,7 @@ export class ProfileEditComponent implements OnInit {
   private minDate: Date;
   private minDateYear: number;
   private subscription: Subscription;
+  private state: string;
 
   constructor(private userService: UserService,
               private userState: UserState,
@@ -25,6 +26,7 @@ export class ProfileEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.state = 'stateless';
     this.user = this.userState.getUser();
     this.minDate = new Date();
     this.minDateYear = this.minDate.getFullYear() - 100;
@@ -34,6 +36,8 @@ export class ProfileEditComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
+
+      this.state = 'loading';
 
       this.subscription = this.userService.putRequest(this.user.username, this.profileForm.value)
         .subscribe(
@@ -48,6 +52,7 @@ export class ProfileEditComponent implements OnInit {
           },
           (error) => {
             console.log(error);
+            this.state = 'failure';
             this.subscription.unsubscribe();
           },
           () => {

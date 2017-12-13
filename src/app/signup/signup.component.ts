@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
   private minDate: Date;
   private minDateYear: number;
   private subscription: Subscription;
+  private state: string;
 
   constructor(private userService: UserService,
               private router: Router,
@@ -27,6 +28,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.state = 'stateless';
     this.minDate = new Date();
     this.minDateYear = this.minDate.getFullYear() - 100;
     this.minDate.setFullYear(this.minDateYear, 1, 1);
@@ -35,29 +37,31 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     if (this.signupForm.valid) {
+      this.state = 'loading';
       this.subscription = this.userService.postRequest(this.signupForm.value)
         .subscribe(
           (response) => {
             if (response.json().mongoDB) {
-              console.log('mongoDB response');
               const user = new User(response.json().mongoDB._id, response.json().mongoDB.name,
                 response.json().mongoDB.DoB, response.json().mongoDB.bio);
               this.userState.setUser(user);
               this.userState.setLoggedIn(true);
               this.onCancel();
             } else {
-              console.log('Neo4J response');
               console.log(response);
             }
           },
           (error) => {
-            console.log('username taken');
-            this.usernameTaken = true;
+            if (error.status === 422) {
+              this.usernameTaken = true;
+              this.state = 'stateless';
+            } else {
+              this.state = 'failure';
+            }
             console.log(error);
             this.subscription.unsubscribe();
           },
           () => {
-            console.log('signup complete and unsubbed');
             this.subscription.unsubscribe();
           }
         )

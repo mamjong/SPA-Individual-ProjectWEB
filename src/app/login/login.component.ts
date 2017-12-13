@@ -16,8 +16,9 @@ export class LoginComponent implements OnInit {
   private formValue;
   private user: User;
   private username: string;
-  loginFailed: boolean;
+  usernameTaken: boolean;
   private subscription: Subscription;
+  private state: string;
 
   constructor(private userService: UserService,
               private userState: UserState,
@@ -25,10 +26,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginFailed = false;
+    this.state = 'stateless';
+    this.usernameTaken = false;
   }
 
   onLogin(form: NgForm) {
+    this.state = 'loading';
     this.formValue = form.value;
     this.username = this.formValue.username;
 
@@ -43,7 +46,12 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.loginFailed = true;
+          if (error.status === 404) {
+            this.usernameTaken = true;
+            this.state = 'stateless';
+          } else {
+            this.state = 'failure'
+          }
           this.subscription.unsubscribe();
         },
         () => {

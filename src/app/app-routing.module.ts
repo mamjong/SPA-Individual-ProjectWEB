@@ -18,7 +18,7 @@ const appRoutes: Routes = [
     { path: ':index', component: ConceptDetailComponent, canActivate: [ConceptsGuard]},
     { path: ':index/edit', component: ConceptEditComponent, canActivate: [LoginGuard]}
   ] },
-  { path: 'user/:username', component: UserComponent, canActivate: [LoginGuard] },
+  { path: 'user/:username', component: UserComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] , canActivateChild: [LoginGuard] , children: [
