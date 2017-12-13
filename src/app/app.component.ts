@@ -13,16 +13,4 @@ import {ConceptsGuard} from "./shared/route-guards/concepts.guard";
   providers: []
 })
 export class AppComponent {
-  private title = 'app';
-  private loadedFeature = 'concepts';
-  private user: User;
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
-
-  handleUserLoggedIn(user: User) {
-    this.user = user;
-    console.log('It worked: ' + user);
-  }
 }
