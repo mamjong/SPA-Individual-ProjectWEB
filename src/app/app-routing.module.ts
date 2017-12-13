@@ -8,18 +8,20 @@ import {ProfileComponent} from "./profile/profile.component";
 import {ProfileEditComponent} from "./profile/profile-edit/profile-edit.component";
 import {SignupComponent} from "./signup/signup.component";
 import {ConceptEditComponent} from "./concept/concept-edit/concept-edit.component";
+import {ConceptsGuard} from "./shared/route-guards/concepts.guard";
+import {LoginGuard} from "./shared/route-guards/login.guard";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/concepts', pathMatch: 'full'},
-  { path: 'concepts', component: ConceptComponent, children: [
-    { path: 'new', component: ConceptEditComponent },
-    { path: ':index', component: ConceptDetailComponent },
-    { path: ':index/edit', component: ConceptEditComponent}
+  { path: 'concepts', component: ConceptComponent ,children: [
+    { path: 'new', component: ConceptEditComponent, canActivate: [LoginGuard]},
+    { path: ':index', component: ConceptDetailComponent, canActivate: [ConceptsGuard]},
+    { path: ':index/edit', component: ConceptEditComponent, canActivate: [LoginGuard]}
   ] },
-  { path: 'user/:username', component: UserComponent },
+  { path: 'user/:username', component: UserComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent, children: [
+  { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] , canActivateChild: [LoginGuard] , children: [
     { path: 'edit', component: ProfileEditComponent }
   ] }
 ];

@@ -5,6 +5,7 @@ import {ConceptsState} from "../../shared/concepts.state";
 import {ConceptService} from "../../shared/services/concept.service";
 import {Concept} from "../../shared/models/concept.model";
 import {Subscription} from "rxjs/Subscription";
+import {UserState} from "../../shared/user.state";
 
 @Component({
   selector: 'app-concept-edit',
@@ -21,18 +22,21 @@ export class ConceptEditComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private conceptsState: ConceptsState,
-              private conceptService: ConceptService) { }
+              private conceptService: ConceptService,
+              private userState: UserState) { }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.index = +params['index'];
-          this.editMode = params['index'] != null;
-          this.concept = this.conceptsState.getConcept(this.index);
-          this.initForm();
-        }
-      );
+    if (this.conceptsState.getFilled()) {
+      this.route.params
+        .subscribe(
+          (params: Params) => {
+            this.index = +params['index'];
+            this.editMode = params['index'] != null;
+            this.concept = this.conceptsState.getConcept(this.index);
+            this.initForm();
+          }
+        );
+    }
   }
 
   onSubmit() {
@@ -44,6 +48,24 @@ export class ConceptEditComponent implements OnInit {
               this.concept = new Concept(response.json()._id, response.json().title, response.json().genre,
                 response.json().description, response.json().likes, response.json().art, response.json().user);
               this.conceptsState.updateConcept(this.index, this.concept);
+            },
+            (error) => {
+              console.log(error);
+              this.subscription.unsubscribe();
+            },
+            () => {
+              this.subscription.unsubscribe();
+              this.onCancel();
+            }
+          )
+      } else {
+        this.subscription = this.conceptService.postRequest(this.conceptForm.value)
+          .subscribe(
+            (response) => {
+              this.concept = new Concept(response.json()._id, response.json().title, response.json().genre,
+                response.json().description, response.json().likes, response.json().art,
+                this.userState.getUser().username);
+              this.conceptsState.pushConcept(this.concept);
             },
             (error) => {
               console.log(error);
@@ -98,12 +120,21 @@ export class ConceptEditComponent implements OnInit {
       }
     }
 
-    this.conceptForm = new FormGroup({
-      'title': new FormControl(conceptTitle, Validators.required),
-      'genre': new FormControl(conceptGenre, Validators.required),
-      'description': new FormControl(conceptDescription, Validators.required),
-      'art': conceptArt
-    });
+    if (this.editMode) {
+      this.conceptForm = new FormGroup({
+        'title': new FormControl(conceptTitle, Validators.required),
+        'genre': new FormControl(conceptGenre, Validators.required),
+        'description': new FormControl(conceptDescription, Validators.required),
+        'art': conceptArt
+      });
+    } else {
+      this.conceptForm = new FormGroup({
+        'title': new FormControl(conceptTitle, Validators.required),
+        'genre': new FormControl(conceptGenre, Validators.required),
+        'description': new FormControl(conceptDescription, Validators.required),
+        'user': new FormControl(this.userState.getUser().username),
+        'art': conceptArt
+      });
+    }
   }
-
 }

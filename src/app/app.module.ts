@@ -20,6 +20,10 @@ import {DateValueAccessorModule} from "angular-date-value-accessor";
 import {BtnAvailableDirective} from './shared/directives/btn-available.directive';
 import { SignupComponent } from './signup/signup.component';
 import { ConceptEditComponent } from './concept/concept-edit/concept-edit.component';
+import {ConceptsGuard} from "./shared/route-guards/concepts.guard";
+import {ConceptsState} from "./shared/concepts.state";
+import {UserState} from "./shared/user.state";
+import {LoginGuard} from "./shared/route-guards/login.guard";
 
 @NgModule({
   declarations: [
@@ -45,7 +49,7 @@ import { ConceptEditComponent } from './concept/concept-edit/concept-edit.compon
     DateValueAccessorModule,
     HttpModule
   ],
-  providers: [ConceptService, UserService],
+  providers: [UserState, ConceptsState, UserService, ConceptService, ConceptsGuard, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

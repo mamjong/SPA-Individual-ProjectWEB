@@ -5,6 +5,7 @@
     </div>
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/concepts">Concepts</a></li>
+        <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/concepts/new">Create concept</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/profile"><span class="glyphicon glyphicon-user"></span>      My Profile</a></li>
