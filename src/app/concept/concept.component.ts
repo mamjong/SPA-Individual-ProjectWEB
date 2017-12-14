@@ -41,6 +41,7 @@ export class ConceptComponent implements OnInit {
         },
         () => {
           this.subscription.unsubscribe();
+          this.conceptsState.setFilled(true);
           this.state = 'success';
         });
 
