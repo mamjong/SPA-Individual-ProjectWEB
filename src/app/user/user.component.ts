@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {User} from "../shared/models/user.model";
 import {UserService} from "../shared/services/user.service";
 import {Subscription} from "rxjs/Subscription";
@@ -15,7 +15,7 @@ import {ConceptsState} from "../shared/concepts.state";
 export class UserComponent implements OnInit {
   user: User;
   private subscription: Subscription;
-  private username: string;
+  @Output() username: string;
   private state: string;
 
   constructor(private userService: UserService,

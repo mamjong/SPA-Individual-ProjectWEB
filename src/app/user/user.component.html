@@ -2,7 +2,7 @@
   <div *ngIf="state === 'loading'" class="col-xs-12">
     <div class="row">
       <div class="loader center-block"></div>
-      <h3 class="text-center">Loading</h3>
+      <h4 class="text-center">Loading</h4>
     </div>
   </div>
   <div *ngIf="state === 'notFound'" class="col-xs-8">
@@ -15,7 +15,8 @@
   <div *ngIf="state === 'failure'" class="col-xs-8">
     <div class="row">
       <div class="col-xs-12">
-        <h4 class="text-danger">Our </h4>
+        <h4 class="text-danger">Getting user failed...</h4>
+        <h5>Please try again later.</h5>
       </div>
     </div>
   </div>

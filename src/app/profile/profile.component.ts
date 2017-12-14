@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {User} from "../shared/models/user.model";
 import {UserState} from "../shared/user.state";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -24,9 +24,7 @@ export class ProfileComponent implements OnInit {
     this.state = 'stateless';
     this.userState.userChanged
       .subscribe((user) => {
-        console.log('userChanged next was called!');
         this.user = user;
-        console.log('new user: ' + this.user);
       });
     this.user = this.userState.getUser();
   }

@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   private formValue;
   private user: User;
   private username: string;
-  usernameTaken: boolean;
+  usernameExists: boolean;
   private subscription: Subscription;
   private state: string;
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.state = 'stateless';
-    this.usernameTaken = false;
+    this.usernameExists = true;
   }
 
   onLogin(form: NgForm) {
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         (error) => {
           console.log(error);
           if (error.status === 404) {
-            this.usernameTaken = true;
+            this.usernameExists = false;
             this.state = 'stateless';
           } else {
             this.state = 'failure'

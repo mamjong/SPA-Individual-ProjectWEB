@@ -12,10 +12,17 @@
           <span class="button-text-large">Edit</span>
           <span class="button-text-small"><span class="glyphicon glyphicon-edit"></span></span>
         </button>
-        <button (click)="onDeleteConcept()" style="margin-top: 3px; width: 100%" class="btn btn-danger pull-right">
+        <button (click)="onDeleteConcept()" style="margin-top: 3px; margin-bottom: 3px; width: 100%" class="btn btn-danger pull-right">
           <span class="button-text-large">Delete</span>
           <span class="button-text-small">X</span>
         </button>
+        <div *ngIf="state === 'loading'">
+            <div style="margin-right: 5px;" class="pull-left loader-small"></div>
+            <p class="pull-left hidden-xs" style="margin-top: 5px;">Deleting...</p>
+        </div>
+        <div *ngIf="state === 'failure'">
+          <p class="text-center text-danger">Failed...</p>
+        </div>
       </div>
     </div>
     <hr>

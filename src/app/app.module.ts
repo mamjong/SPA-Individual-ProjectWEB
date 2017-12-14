@@ -24,6 +24,7 @@ import {ConceptsGuard} from "./shared/route-guards/concepts.guard";
 import {ConceptsState} from "./shared/concepts.state";
 import {UserState} from "./shared/user.state";
 import {LoginGuard} from "./shared/route-guards/login.guard";
+import {ProfileRelatedComponent} from './profile/profile-related/profile-related.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {LoginGuard} from "./shared/route-guards/login.guard";
     ProfileEditComponent,
     BtnAvailableDirective,
     SignupComponent,
-    ConceptEditComponent
+    ConceptEditComponent,
+    ProfileRelatedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,15 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">Gacon</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarref">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
+    <div class="collapse navbar-collapse" id="navbarref">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/concepts">Concepts</a></li>
         <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/concepts/new">Create concept</a></li>
@@ -12,6 +19,7 @@
         <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span>      Login</a></li>
         <li *ngIf="!loggedIn" routerLinkActive="active"><a class="text-danger" routerLink="/signup"><span class="glyphicon glyphicon-user"></span>      Sign up</a></li>
       </ul>
+    </div>
   </div>
 </nav>
 

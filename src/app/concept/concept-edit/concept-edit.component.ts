@@ -18,6 +18,7 @@ export class ConceptEditComponent implements OnInit {
   private subscription: Subscription;
   private index: number;
   editMode: boolean;
+  state: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -26,6 +27,8 @@ export class ConceptEditComponent implements OnInit {
               private userState: UserState) { }
 
   ngOnInit() {
+    this.state = 'stateless';
+
     if (this.conceptsState.getFilled()) {
       this.route.params
         .subscribe(
@@ -41,6 +44,7 @@ export class ConceptEditComponent implements OnInit {
 
   onSubmit() {
     if (this.conceptForm.valid) {
+      this.state = 'loading';
       if (this.editMode) {
         this.subscription = this.conceptService.putRequest(this.concept.id ,this.conceptForm.value)
           .subscribe(
@@ -52,9 +56,11 @@ export class ConceptEditComponent implements OnInit {
             (error) => {
               console.log(error);
               this.subscription.unsubscribe();
+              this.state = 'failure';
             },
             () => {
               this.subscription.unsubscribe();
+              this.state = 'stateless';
               this.onCancel();
             }
           )
@@ -70,9 +76,11 @@ export class ConceptEditComponent implements OnInit {
             (error) => {
               console.log(error);
               this.subscription.unsubscribe();
+              this.state = 'failure';
             },
             () => {
               this.subscription.unsubscribe();
+              this.state = 'stateless';
               this.onCancel();
             }
           )

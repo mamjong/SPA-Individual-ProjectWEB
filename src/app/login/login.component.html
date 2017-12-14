@@ -11,12 +11,12 @@
             name="username"
             ngModel
             required
-            (focus)="usernameTaken = false">
+            (focus)="usernameExists = true">
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <p class="text-danger" *ngIf="usernameTaken">Username unavailable...</p>
+          <p style="margin-bottom: 15px;" class="text-danger" *ngIf="!usernameExists">User doesn't exist...</p>
         </div>
       </div>
       <div *ngIf="state === 'loading'">

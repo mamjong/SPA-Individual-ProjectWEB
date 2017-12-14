@@ -13,12 +13,15 @@ import {ConceptsState} from "../shared/concepts.state";
 export class ConceptComponent implements OnInit {
   concepts: Concept[];
   private subscription: Subscription;
+  state: string;
 
   constructor(private conceptService: ConceptService,
               private conceptsState: ConceptsState) {
   }
 
   ngOnInit() {
+
+    this.state = 'loading';
 
     this.concepts = [];
 
@@ -34,9 +37,11 @@ export class ConceptComponent implements OnInit {
         (error) => {
           console.log(error);
           this.subscription.unsubscribe();
+          this.state = 'failure';
         },
         () => {
           this.subscription.unsubscribe();
+          this.state = 'success';
         });
 
     this.conceptsState.conceptsChanged

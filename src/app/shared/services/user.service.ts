@@ -18,6 +18,10 @@ export class UserService implements IService {
     return this.http.get(this.apiEntityUrl + routeParams);
   }
 
+  getRelated(routeParams: string): Observable<any> {
+    return this.http.get(this.apiEntityUrl + routeParams + '/related');
+  }
+
   postRequest(object: User): Observable<any> {
 
     return Observable.create((observer: Observer<any>) => {

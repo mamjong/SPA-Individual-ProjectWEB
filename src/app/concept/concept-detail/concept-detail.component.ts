@@ -16,6 +16,7 @@ export class ConceptDetailComponent implements OnInit {
   concept: Concept;
   madeByUser: boolean;
   private subscription: Subscription;
+  state: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -24,6 +25,8 @@ export class ConceptDetailComponent implements OnInit {
               private conceptsState: ConceptsState) { }
 
   ngOnInit() {
+    this.state = 'stateless';
+
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -52,20 +55,22 @@ export class ConceptDetailComponent implements OnInit {
   }
 
   onDeleteConcept() {
+    this.state = 'loading';
 
     this.subscription = this.conceptService.deleteRequest(this.concept.id)
       .subscribe(
         () => {
-          console.log('emitted');
           this.router.navigate(['/concepts']);
           this.conceptsState.deleteConcept(this.index);
         },
         (error) => {
           console.log(error);
           this.subscription.unsubscribe();
+          this.state = 'failure';
         },
         () => {
           this.subscription.unsubscribe();
+          this.state = 'stateless';
         }
       )
   }
