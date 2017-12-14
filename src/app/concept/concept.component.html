@@ -1,6 +1,21 @@
 <div class="row">
-  <app-concept-item
-    *ngFor="let concept of concepts; let i = index"
-    [concept]="concept"
-    [index]="i"></app-concept-item>
+  <div class="col-md-4">
+    <div *ngIf="state === 'failure'">
+      <h4 class="text-danger">Loading concepts failed...</h4>
+      <h5>Please try again later.</h5>
+    </div>
+    <div *ngIf="state === 'loading'">
+        <div class="loader center-block"></div>
+        <h4 class="text-center">Loading in concepts</h4>
+    </div>
+    <div *ngIf="state === 'success'">
+      <app-concept-item
+        *ngFor="let concept of concepts; let i = index"
+        [concept]="concept"
+        [index]="i"></app-concept-item>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
 </div>

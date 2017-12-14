@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ user.name }}</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.DoBString }}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.bio }}
+      </div>
+    </div>
+    <hr>
+    <div *ngIf="state === 'stateless'">
+      <div class="row">
+        <div class="col-xs-12">
+          <div
+            class="btn-group"
+            dropdownDir>
+            <button
+              type="button"
+              class="btn btn-primary dropdown-toggle">
+              Manage profile <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a style="cursor: pointer;" (click)="onEditProfile()">Edit profile</a></li>
+              <li><a style="cursor: pointer;" (click)="onDeleteProfile()">Delete profile</a></li>
+              <!--<li><a style="cursor: pointer;" (click)="onDeleteRecipe()">Delete Recipe</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="state === 'loading'">
+      <div class="row">
+        <div class="col-xs-12">
+          <div style="margin-right: 10px;" class="pull-left loader-small"></div>
+          <h6 class="pull-left"> Deleting...</h6>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="state === 'failure'">
+      <div class="row">
+        <div class="col-xs-12">
+          <h5 class="text-danger">Deleting failed...</h5>
+          <h6>Please try again later.</h6>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-xs-12">
+        <app-profile-related></app-profile-related>
+      </div>
+    </div>
+  </div>
+</div>
+
+

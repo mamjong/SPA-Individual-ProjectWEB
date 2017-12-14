@@ -1,0 +1,127 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="conceptForm" (ngSubmit)="onSubmit()">
+      <div class="row listItem">
+        <div style="margin-top: 10px;" class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="title">Title: </label>
+                <input
+                  type="text"
+                  id="title"
+                  formControlName="title"
+                  class="form-control">
+                <div class="alert alert-danger" *ngIf="conceptForm.get('title').invalid && conceptForm.get('title').touched">A title is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="genre">Genre: </label>
+                <input
+                  type="text"
+                  id="genre"
+                  formControlName="genre"
+                  class="form-control">
+                <div class="alert alert-danger" *ngIf="conceptForm.get('genre').invalid && conceptForm.get('genre').touched">A genre is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="from-group">
+                <label for="description">Description: </label>
+                <textarea
+                  type="text"
+                  id="description"
+                  formControlName="description"
+                  class="form-control"
+                  rows="10"></textarea>
+                <div class="alert alert-danger" *ngIf="conceptForm.get('description').invalid && conceptForm.get('description').touched">A description is
+                  required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12" formGroupName="art">
+              <div class="from-group">
+                <div
+                  class="row"
+                  *ngFor="let artControl of formData.controls; let i = index"
+                  [formGroupName]="i"
+                  style="margin-top: 5px;">
+                  <div class="col-xs-8">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="path">
+                  </div>
+                  <div class="col-xs-4">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="onDeleteArt(i)">X
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <button
+                type="button"
+                class="btn btn-success"
+                style="margin-bottom: 20px;"
+                (click)="onAddArt()">Add art
+              </button>
+            </div>
+          </div>
+          <div *ngIf="state === 'loading'">
+            <div class="row">
+              <div style="margin-bottom: 15px;" class="col-xs-12">
+                <div style="margin-right: 10px;" class="pull-left loader-small"></div>
+                <h6 class="pull-left"> Submitting...</h6>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="state === 'failure'">
+            <div class="row">
+              <div style="margin-bottom: 15px" class="col-xs-12">
+                <h5 class="text-danger">Submission failed...</h5>
+                <h6>Please try again later.</h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <button
+                type="submit"
+                [appBtnAvailable]="conceptForm.valid"
+                class="pull-right btn"
+                style="margin-bottom: 5px; width: 100%">Save
+              </button>
+            </div>
+            <div class="col-xs-6">
+              <button
+                type="submit"
+                class="pull-right btn btn-danger"
+                style="margin-bottom: 5px; width: 100%;"
+                (click)="onCancel()">Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="row">
+  <div *ngIf="state === 'loading'" class="col-xs-12">
+    <div class="row">
+      <div class="loader center-block"></div>
+      <h4 class="text-center">Loading</h4>
+    </div>
+  </div>
+  <div *ngIf="state === 'notFound'" class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-danger">User with given username doesn't exist!</h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="state === 'failure'" class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-danger">Getting user failed...</h4>
+        <h5>Please try again later.</h5>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="state === 'success'" class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{ user.name || user.username }}</h1>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.DoBString || 'User hasn\'t submitted his DoB' }}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ user.bio || 'User has no bio' }}
+      </div>
+    </div>
+    <hr>
+  </div>
+</div>
+

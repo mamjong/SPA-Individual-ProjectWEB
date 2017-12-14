@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h5>Users with same birthday</h5>
+  </div>
+</div>
+<div class="row">
+  <div *ngIf="state === 'stateless'">
+    <table class="table listItem" style="height: 100%">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="users.length > 0">
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <th><a style="cursor: pointer;"
+               (click)="onUserClick(i)">{{ user }}</a></th>
+      </tr>
+      </tbody>
+      <tbody *ngIf="users.length === 0">
+      <tr>
+        <th scope="row">-</th>
+        <th class="text-danger" style="margin-left: 10px;">There are no users with the same birthdate as you.</th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="state === 'loading'">
+    <div class="col-xs-12 listItem">
+      <div style="margin-right: 10px; margin-top: 15px; margin-bottom: 15px;" class="pull-left loader-small"></div>
+      <h6 style="margin-top: 25px; margin-bottom: 15px;" class="pull-left"> Getting related users...</h6>
+    </div>
+  </div>
+  <div *ngIf="state === 'failure'">
+    <div class="col-xs-12 listItem">
+      <h5 class="text-danger">Getting related users failed...</h5>
+      <h6>Please try again later.</h6>
+    </div>
+  </div>
+</div>

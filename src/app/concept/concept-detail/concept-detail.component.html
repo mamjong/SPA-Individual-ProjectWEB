@@ -1,0 +1,53 @@
+<div class="row listItem">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-10">
+        <h1>{{ concept.title }}</h1>
+        <a
+          style="cursor: pointer;"
+          (click)="onUserClick()"><h5>by {{ concept.user }}</h5></a>
+      </div>
+      <div *ngIf="madeByUser" class="col-xs-2">
+        <button (click)="onEditConcept()" style="margin-top: 10px; width: 100%" class="btn btn-warning pull-right">
+          <span class="button-text-large">Edit</span>
+          <span class="button-text-small"><span class="glyphicon glyphicon-edit"></span></span>
+        </button>
+        <button (click)="onDeleteConcept()" style="margin-top: 3px; margin-bottom: 3px; width: 100%" class="btn btn-danger pull-right">
+          <span class="button-text-large">Delete</span>
+          <span class="button-text-small">X</span>
+        </button>
+        <div *ngIf="state === 'loading'">
+            <div style="margin-right: 5px;" class="pull-left loader-small"></div>
+            <p class="pull-left hidden-xs" style="margin-top: 5px;">Deleting...</p>
+        </div>
+        <div *ngIf="state === 'failure'">
+          <p class="text-center text-danger">Failed...</p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-10">
+        {{ concept.genre }}
+      </div>
+      <div class="col-xs-2">
+        {{ concept.likes }} upvotes
+      </div>
+    </div>
+    <hr class="hidden-xs">
+    <div class="row hidden-xs">
+      <div class="col-xs-12 hidden-xs">
+        {{ concept.description }}
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+        <img
+          *ngFor="let artPath of concept.art"
+          [src]="artPath.path"
+          alt=""
+          class="img-responsive pull-left"
+          style="max-height: 100px; max-width: 100px; margin: 5px;">
+    </div>
+  </div>
+</div>

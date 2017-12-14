@@ -1,0 +1,28 @@
+img {
+  transition:transform 0.25s ease;
+}
+
+img:hover {
+  -webkit-transform:scale(3);
+  transform:scale(3);
+}
+
+@media screen and (max-width: 600px) {
+  .button-text-large {
+    display: none;
+  }
+
+  .button-text-small {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .button-text-large {
+    display: block;
+  }
+
+  .button-text-small {
+    display: none;
+  }
+}

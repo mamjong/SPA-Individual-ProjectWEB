@@ -1,25 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import {Concept} from "./concept.model";
-import {User} from "../shared/user.model";
+import {Component, OnInit} from '@angular/core';
+import {Concept} from "../shared/models/concept.model";
+import {Subscription} from "rxjs/Subscription";
+import {ConceptService} from "../shared/services/concept.service";
+import {ConceptsState} from "../shared/concepts.state";
 
 @Component({
   selector: 'app-concept',
   templateUrl: './concept.component.html',
-  styleUrls: ['./concept.component.css']
+  styleUrls: ['./concept.component.css'],
+
 })
 export class ConceptComponent implements OnInit {
   concepts: Concept[];
-  testConcept: Concept;
-  testUser: User;
+  private subscription: Subscription;
+  state: string;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.testUser = new User('Maanmidejo', 'Mark de Jong', '1999-06-29', 'Hi there!');
-    this.testConcept = new Concept('TestConcept', 'MMORPG', 'Just a great MMORPG', 24,
-      [{path: 'https://eu.battle.net/forums/static/images/game-logos/game-logo-wow.png'}], this.testUser);
-    this.concepts = [];
-    this.concepts.push(this.testConcept);
+  constructor(private conceptService: ConceptService,
+              private conceptsState: ConceptsState) {
   }
 
+  ngOnInit() {
+
+    this.state = 'loading';
+
+    this.concepts = [];
+
+    this.subscription = this.conceptService.getRequest()
+      .subscribe(
+        (concepts) => {
+          concepts.json().forEach((concept) => {
+            let conceptModel = new Concept(concept._id, concept.title, concept.genre, concept.description, concept.likes, concept.art, concept.user);
+            this.concepts.push(conceptModel);
+            this.conceptsState.setConcepts(this.concepts);
+          });
+        },
+        (error) => {
+          console.log(error);
+          this.subscription.unsubscribe();
+          this.state = 'failure';
+        },
+        () => {
+          this.subscription.unsubscribe();
+          this.conceptsState.setFilled(true);
+          this.state = 'success';
+        });
+
+    this.conceptsState.conceptsChanged
+      .subscribe((concepts) => {
+        this.concepts = concepts;
+      });
+  }
 }

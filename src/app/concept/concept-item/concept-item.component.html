@@ -1,1 +1,13 @@
-<h4>{{ concept.title }}</h4>
+<a style="cursor: pointer;"
+   [routerLink]="[index]"
+   routerLinkActive="active"
+   class="list-group-item clearfix">
+
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ concept.title }}</h4>
+    <h6 class="list-group-item-text">{{ concept.genre }}</h6>
+  </div>
+  <div class="pull-right">
+    <h6 class="list-group-item-text">{{ concept.likes }} upvotes</h6>
+  </div>
+</a>
