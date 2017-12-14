@@ -13,7 +13,7 @@ import {Subscription} from "rxjs/Subscription";
 export class ProfileComponent implements OnInit {
   user: User;
   private subscription: Subscription;
-  private state;
+  state;
 
   constructor(private userState: UserState,
               private userService: UserService,

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   private username: string;
   usernameExists: boolean;
   private subscription: Subscription;
-  private state: string;
+  state: string;
 
   constructor(private userService: UserService,
               private userState: UserState,

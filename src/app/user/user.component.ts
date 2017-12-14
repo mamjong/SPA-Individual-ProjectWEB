@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   user: User;
   private subscription: Subscription;
   @Output() username: string;
-  private state: string;
+  state: string;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute) {

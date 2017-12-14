@@ -18,7 +18,7 @@ export class ProfileEditComponent implements OnInit {
   private minDate: Date;
   private minDateYear: number;
   private subscription: Subscription;
-  private state: string;
+  state: string;
 
   constructor(private userService: UserService,
               private userState: UserState,
